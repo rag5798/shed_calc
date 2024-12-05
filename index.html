@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shed Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="calc.js" defer></script>
 </head>
 <body>
     <header>
@@ -11,22 +13,220 @@
     </header>
     <main>
         <h1>Style</h1>
+        <!-- 12 X 16 or Greater Vicorian can have a garage 900 upcharge -->
+        <p id="roof_error"></p>
         <label for="roof">Roof Type</label>
         <select name="roof_type" id="roof">
+            <option value="none">Please Select A Style</option>
             <option value="shed">Shed</option>
             <option value="barn">Barn</option>
             <option value="victorian">Victorian</option>
             <option value="garden_studio">Garden Studio</option>
         </select>
-        <label for="garage">Garage Addition</label>
-        <input type="checkbox" id="garage">
+        <h1>Size</h1>
+        <label for="">Size For Shed or Barn</label>
+        <select name="size_dropbox" id="size">
+            <option value="none">Please Select A Size</option>
+            <optgroup label="8 X _" id="8x">
+                <option value="8x8">8 X 8</option>
+                <option value="8x10">8 X 10</option>
+                <option value="8x12">8 X 12</option>
+                <option value="8x16">8 X 16</option>
+            </optgroup>
+            <optgroup label="10 X _" id="10x">
+                <option value="10x10" id="10x10">10 X 10</option>
+                <option value="10x12">10 X 12</option>
+                <option value="10x16">10 X 16</option>
+                <option value="10x20">10 X 20</option>
+                <option value="10x24">10 X 24</option>
+            </optgroup>
+            <optgroup label="12 X _" id="12">
+                <option value="12x12">12 X 12</option>
+                <option value="12x16">12 X 16</option>
+                <option value="12x20">12 X 20</option>
+                <option value="12x24">12 X 24</option>
+                <option value="12x28">12 X 28</option>
+                <option value="12x32">12 X 32</option>
+                <option value="12x36">12 X 36</option>
+                <option value="12x40">12 X 40</option>
+            </optgroup>
+            <optgroup label="14 X _" id="14">
+                <option value="14x20">14 X 20</option>
+                <option value="14x24">14 X 24</option>
+                <option value="14x28">14 X 28</option>
+                <option value="14x30">14 X 30</option>
+                <option value="14x32">14 X 32</option>
+                <option value="14x36">14 X 36</option>
+                <option value="14x40">14 X 40</option>
+            </optgroup>
+        </select>
+        <label for="garage" id="garage_label" class="hide">Garage Addition</label>
+        <input type="checkbox" id="garage" class="hide">
         <h1>Windows</h1>
         <label for="window">Window Type</label>
         <select name="window_type" id="window">
+            <option value="none">Please Select A Window</option>
             <option value="single">Single Pane</option>
-            <option value="double">Kindro</option>
+            <option value="double">Double Pane</option>
+            <option value="both">Both Types</option>
         </select>
-        <h2></h2>
+        <div id="single_pane" class="hide">
+            <h2>Single Pane Windows</h2>
+            <form id="single_form">
+                <label for="18x27">18" X 27"</label>
+                <input type="text" id="18x27" name="18x27" placeholder="Please enter a Quantity">
+            
+                <label for="21x27">21" X 27"</label>
+                <input type="text" id="21x27" name="21x27" placeholder="Please enter a Quantity">
+            
+                <label for="24x36">24" X 36"</label>
+                <input type="text" id="24x36" name="24x36" placeholder="Please enter a Quantity">
+            
+                <label for="30x36">30" X 36"</label>
+                <input type="text" id="30x36" name="30x36" placeholder="Please enter a Quantity">
+            
+                <label for="18_octagon">18" Octagon</label>
+                <input type="text" id="18_octagon" name="18_octagon" placeholder="Please enter a Quantity">
+            
+                <label for="10x60">10" X 60"</label>
+                <input type="text" id="10x60" name="10x60" placeholder="Please enter a Quantity">
+            
+                <label for="transwin">72" Transwin</label>
+                <input type="text" id="transwin" name="transwin" placeholder="Please enter a Quantity">
+            
+                <label for="flowerbox">24" Flowerbox</label>
+                <input type="text" id="flowerbox" name="flowerbox" placeholder="Please enter a Quantity">
+            
+                <label for="shutter">36" Shutters</label>
+                <input type="text" id="shutter" name="shutter" placeholder="Please enter a Quantity">
+            
+                <button type="submit" id="single_submit">Calculate Price</button>
+            </form>            
+        </div>
+        <div id="double_pane" class="hide">
+            <h2>Double Pane Windows</h2>
+            <form id="double_form">
+                <label for="24x36">24" X 36"</label>
+                <input type="text" id="24x36">
+                <label for="36x36">36" X 36"</label>
+                <input type="text" id="36x36">
+                <label for="36x48">36" X 48"</label>
+                <input type="text" id="36x48">
+                <label for="48x36">48" X 36" Slider</label>
+                <input type="text" id="48x36">
+                <label for="48x48">48" X 48"</label>
+                <input type="text" id="48x48">
+                <label for="60x42">60" X 42"</label>
+                <input type="text" id="60x42">
+                <label for="double_flowerbox">Flowerbox</label>
+                <input type="text" id="double_flowerbox">
+                <label for="double_shutter">36" Shutters</label>
+                <input type="text" id="double_shutter">
+                <button type="submit" id="double_submit">Calculate Price</button>
+            </form>
+        </div>
+        <h1>Doors</h1>
+        <!-- If customer wants different colored door than what is chosen for siding, add $100 -->
+        <label for="door">Door Type</label>
+        <select name="door_type" id="door">
+            <option value="none">Please Select A Door</option>
+            <option value="fiberglass">Fiberglass</option>
+            <option value="wood">Wood Shed Door</option>
+            <option value="rollup">Roll-Up Door</option>
+            <option value="all">All Doors</option>
+        </select>
+        <div id="fiberglass_options" class="hide">
+            <h2>Fiberglass</h2>
+            <form id="fiberglass_form">
+                <label for="6_fiber">6 panel</label>
+                <input type="text" id="6_fiber">
+                <label for="9_fiber">9-Lite</label>
+                <input type="text" id="9_fiber">
+                <label for="15_fiber">15-Lite</label>
+                <input type="text" id="15_fiber">
+                <label for="60x68_fiber">60" X 68"</label>
+                <input type="text" id="60x68_fiber">
+                <button type="submit">Calculate Price</button>
+            </form>
+        </div>
+        <div id="wood_options" class="hide">
+            <h2>Wood Door</h2>
+            <form id="wood_form">
+                <label for="36_wood">36"</label>
+                <input type="text" id="36_wood">
+                <label for="5_wood">5'</label>
+                <input type="text" id="5_wood">
+                <label for="6_wood">6'</label>
+                <input type="text" id="6_wood">
+                <label for="8_wood">8'</label>
+                <input type="text" id="8_wood">
+                <button type="submit">Calculate Price</button>
+            </form>
+        </div>
+        <div id="roll_options" class="hide">
+            <h2>Roll-Up Door</h2>
+            <form id="roll_form">
+                <label for="8x7_roll">8' X 7'</label>
+                <input type="text" id="8x7_roll">
+                <label for="9x7_roll">9' X 7'</label>
+                <input type="text" id="9x7_roll">
+                <label for="10x7_roll">10' X 7'</label>
+                <input type="text" id="10x7_roll">
+                <label for="color">Color Add-on</label>
+                <input type="checkbox" id="color">
+                <button type="submit">Calculate Price</button>
+            </form>
+        </div>
+        <h1>Porches</h1>
+        <label for="porch_size">Porch Extention</label>
+        <select name="porch" id="porch_size">
+            <option value="none">Please Select a Size</option>
+            <option value="4">4ft</option>
+            <option value="6">6ft</option>
+            <option value="8">8ft</option>
+        </select>
+        <label for="side_porch">Side Porch</label>
+        <input type="checkbox" id="side_porch">
+        <label for="main_railing">Main Porch Raling</label>
+        <input type="checkbox" id="main_railing">
+        <label for="side_railing">Side Porch Raling</label>
+        <input type="checkbox" id="side_railing">
+        <!--Railings need to calculate the perimeter of the porch 2L + W -->
+        <h1>Ramp</h1>
+        <label for="metal_ramp">Metal Ramp</label>
+        <input type="checkbox" id="metal_ramp">
+        <form id="wood_ramp_form">
+            <label for="wood_ramp">Wood Ramp</label>
+            <input type="text" id="wood_ramp">
+            <button type="submit">Calculate Price</button>
+        </form>
+        <h1>Options</h1>
+        <label for="workbench">Workbench</label>
+        <input type="checkbox" id="workbench">
+        <label for="loft">Loft</label>
+        <input type="checkbox" id="loft">
+        <!--If its a barn-->
+        <div>
+            <label for="overhang">8" Overhang for Barn</label>
+            <input type="checkbox" id="overhang">
+        </div>
+        <!--If its a garden studio-->
+        <div>
+            <label for="garden_vent">Arched Garden Vent</label>
+            <input type="text" id="garden_vent">
+        </div>
+        <label for="on_site">Build on Site</label>
+        <input type="checkbox" id="on_site">
+        <label for="silvertech">Silvertech Wall & Roof</label>
+        <input type="checkbox" name="silvertech_roof" id="silvertech">
+        <label for="shingle">Shingles</label>
+        <input type="checkbox" id="shingle">
+        <!--Interior Walls need to calculate the perimeter of the shed 2L + 2W -->
+        <label for="interior">Interior Walls 2 X 4</label>
+        <input type="checkbox" id="interior">
+        <label for="exterior">Exterior Walls 2 X 6</label>
+        <input type="checkbox" id="exterior">
+        <p>Price: <p id="price">0</p></p>
     </main>
     <footer>
 
