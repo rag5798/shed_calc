@@ -212,13 +212,18 @@
         </div>
         <!--If its a garden studio-->
         <div>
-            <label for="garden_vent">Arched Garden Vent</label>
-            <input type="text" id="garden_vent">
+            <form id="vent_form">
+                <label for="garden_vent">Arched Garden Vent</label>
+                <input type="text" id="garden_vent">
+                <button type="submit">Calculate Price</button>
+            </form>
         </div>
         <label for="on_site">Build on Site</label>
         <input type="checkbox" id="on_site">
         <label for="silvertech">Silvertech Wall & Roof</label>
         <input type="checkbox" name="silvertech_roof" id="silvertech">
+        <label for="siding">Vinly or Metal Siding</label>
+        <input type="checkbox" id="siding">
         <label for="shingle">Shingles</label>
         <input type="checkbox" id="shingle">
         <!--Interior Walls need to calculate the perimeter of the shed 2L + 2W -->

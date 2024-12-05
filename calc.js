@@ -25,7 +25,7 @@ const shed_price = {
     "14x32": 10619,
     "14x36": 12049,
     "14x40": 13749
-}
+};
 
 const shed_garage = {
     "10x10": 4669,
@@ -48,7 +48,7 @@ const shed_garage = {
     "14x32": 11479,
     "14x36": 12929,
     "14x40": 14639
-}
+};
 
 const barn_price = {
     "8x8": 3499,
@@ -75,7 +75,7 @@ const barn_price = {
     "14x32": 11419,
     "14x36": 12959,
     "14x40": 14789
-}
+};
 
 const barn_garage = {
     "10x10": 4869,
@@ -98,7 +98,7 @@ const barn_garage = {
     "14x32": 12299,
     "14x36": 13859,
     "14x40": 15699
-}
+};
 
 const victorian_price = {
     "10x12": 5379,
@@ -113,7 +113,7 @@ const victorian_price = {
     "12x32": 10879,
     "12x36": 12429,
     "12x40": 14129
-}
+};
 
 const garden_price = {
     "10x12": 5379,
@@ -128,7 +128,7 @@ const garden_price = {
     "12x32": 10879,
     "12x36": 12429,
     "12x40": 14129
-}
+};
 
 const single_pane_window_price = {
     "18x27": 95,
@@ -140,7 +140,7 @@ const single_pane_window_price = {
     "transwin": 120,
     "flowerbox": 30,
     "shutter": 30
-}
+};
 
 const double_pane_window_price = {
     "24x36":195,
@@ -151,60 +151,60 @@ const double_pane_window_price = {
     "60x42": 360,
     "double_flowerbox": 30,
     "double_shutter": 30
-}
+};
 
 const fiberglass_door_price = {
     "6_fiber": 350,
     "9_fiber": 395,
     "15_fiber": 490,
     "60x68_fiber": 695
-}
+};
 
 const roll_up_door_price = {
     "8x7_roll": 725,
     "9x7_roll": 755,
     "10x7_roll": 890,
     "color": 80
-}
+};
 
 const wood_door_price = {
     "36_wood": 100,
     "5_wood": 200,
     "6_wood": 200,
     "8_wood": 300
-}
+};
 
 const porch_price = {
     "4": 400,
     "6": 500,
     "8": 600,
-}
+};
 
 //Side Porch Price
-const side_porch = 600
+const side_porch = 600;
 
 //20 per Liniar Foot
-const railing_price = 20
+const railing_price = 20;
 
 //Metal Must be 2
 const ramp_price = {
     "metal_ramp": 450,
     "wood_ramp": 225
-}
+};
 
 const work_bench_price = {
     "8x_": 120,
     "10x_": 120,
     "12x_": 150,
     "14x_": 150
-}
+};
 
 const loft_price = {
     "8x_": 100,
     "10x_": 100,
     "12x_": 150,
     "14x_": 150
-}
+};
 
 const overhang_price = 300;
 
@@ -252,31 +252,33 @@ let previous_double_pane_input = {
     "60x42": 0,
     "double_flowerbox": 0,
     "double_shutter": 0
-}
+};
 
 let previous_fiberglass_input = {
     "6_fiber": 0,
     "9_fiber": 0,
     "15_fiber": 0,
     "60x68_fiber": 0
-}
+};
 
 let previous_wood_input = {
     "36_wood": 0,
     "5_wood": 0,
     "6_wood": 0,
     "8_wood": 0,
-}
+};
 
 let previous_roll_input = {
     "8x7_roll": 0,
     "9x7_roll": 0,
     "10x7_roll": 0
-}
+};
 
-let previous_porch = ""
+let previous_porch = "";
 
-let previous_wood_ramp = 0
+let previous_wood_ramp = 0;
+
+let previous_vent = 0;
 //*************************************************************************************************************
 
 //unhides things when needed
@@ -302,6 +304,7 @@ function roof_options(){
         if (!document.getElementById('8x')){
             const eight_by = document.createElement('optgroup');
             eight_by.label = "8 X _";
+            eight_by.id = '8x'
             eight_by.innerHTML = "<option value=\"8x8\">8 X 8</option><option value=\"8x10\">8 X 10</option><option value=\"8x12\">8 X 12</option><option value=\"8x16\">8 X 16</option>";
             size.insertBefore(eight_by, size.children[1]);
         }
@@ -314,6 +317,10 @@ function roof_options(){
             ten_by_ten.text = "10 X 10";
             ten_by.prepend(ten_by_ten);
         }
+    }
+
+    if (roof_type.value == 'none'){
+        price.textContent = '0'
     }
 }
 
@@ -373,15 +380,15 @@ function add_garage_price(){
     const price = document.getElementById('price');
     if (garage_box.checked){
         if (roof_type.value == 'barn'){
-            price.textContent = `${parseInt(price.textContent) + (barn_garage[size.value] - barn_price[size.value])}` 
+            price.textContent = `${parseFloat(price.textContent) + (barn_garage[size.value] - barn_price[size.value])}` 
         }else{
-            price.textContent = `${parseInt(price.textContent) + (shed_garage[size.value] - shed_price[size.value])}`
+            price.textContent = `${parseFloat(price.textContent) + (shed_garage[size.value] - shed_price[size.value])}`
         }
     }else{
         if (roof_type.value == 'barn'){
-            price.textContent = `${parseInt(price.textContent) - (barn_garage[size.value] - barn_price[size.value])}` 
+            price.textContent = `${parseFloat(price.textContent) - (barn_garage[size.value] - barn_price[size.value])}` 
         }else{
-            price.textContent = `${parseInt(price.textContent) - (shed_garage[size.value] - shed_price[size.value])}`
+            price.textContent = `${parseFloat(price.textContent) - (shed_garage[size.value] - shed_price[size.value])}`
         }
     }
 }
@@ -509,7 +516,7 @@ function show_door_options(){
     const color_box = document.getElementById('color');
     const price = document.getElementById('price');
     if (color_box.checked == true){
-        price.textContent = `${parseInt(price.textContent) - roll_up_door_price['color']}`;
+        price.textContent = `${parseFloat(price.textContent) - roll_up_door_price['color']}`;
         color_box.checked = false;
     }
     if (door_select.value == 'none'){
@@ -677,7 +684,7 @@ document.getElementById('roll_form').addEventListener('submit', calc_roll_price)
 function add_color_price(){
     const color_box = document.getElementById('color');
     const price = document.getElementById('price');
-    let current_price = parseInt(price.textContent.trim()) || 0;
+    let current_price = parseFloat(price.textContent.trim()) || 0;
     if (color_box.checked == true){
         price.textContent = `${current_price + roll_up_door_price['color']}`;
     }else{
@@ -694,13 +701,13 @@ function add_porch_price(){
     const porch_select = document.getElementById('porch_size')
     if (porch_select.value == 'none'){
         if (previous_porch !== "" && previous_porch !== "none"){
-            price.textContent = `${parseInt(price.textContent) - porch_price[previous_porch]}`;
+            price.textContent = `${parseFloat(price.textContent) - porch_price[previous_porch]}`;
         }
     }else{
         if (previous_porch !== "" && previous_porch !== "none"){
-            price.textContent = `${parseInt(price.textContent) - porch_price[previous_porch]}`;
+            price.textContent = `${parseFloat(price.textContent) - porch_price[previous_porch]}`;
         }
-        price.textContent = `${parseInt(price.textContent) + porch_price[porch_select.value]}`;
+        price.textContent = `${parseFloat(price.textContent) + porch_price[porch_select.value]}`;
     }
     previous_porch = porch_select.value
 }
@@ -711,9 +718,9 @@ function add_side_price(){
     const price = document.getElementById('price');
     const side_porch_box = document.getElementById('side_porch');
     if (side_porch_box.checked == true){
-        price.textContent = `${parseInt(price.textContent) + side_porch}`;
+        price.textContent = `${parseFloat(price.textContent) + side_porch}`;
     }else{
-        price.textContent = `${parseInt(price.textContent) - side_porch}`;
+        price.textContent = `${parseFloat(price.textContent) - side_porch}`;
     }
 }
 
@@ -725,15 +732,15 @@ function add_main_railing_price(){
     const porch_select = document.getElementById('porch_size');
     const size = document.getElementById('size');
     const width = size.value.slice(0,2);
-    if (!parseInt(width)){
+    if (!parseFloat(width)){
         width = size.value.slice(0, 1);
     }
-    const linear_ft = (2 * parseInt(porch_select.value)) + parseInt(width);
+    const linear_ft = (2 * parseFloat(porch_select.value)) + parseFloat(width);
     console.log(linear_ft)
     if (main_railing_box.checked == true){
-        price.textContent = `${parseInt(price.textContent) + (linear_ft * railing_price)}`;
+        price.textContent = `${parseFloat(price.textContent) + (linear_ft * railing_price)}`;
     }else{
-        price.textContent = `${parseInt(price.textContent) - (linear_ft * railing_price)}`;
+        price.textContent = `${parseFloat(price.textContent) - (linear_ft * railing_price)}`;
     }
 }
 
@@ -746,9 +753,9 @@ function add_side_railing_price(){
     const linear_ft = (2 * 4) + 8;
     console.log(linear_ft)
     if (side_railing_box.checked == true){
-        price.textContent = `${parseInt(price.textContent) + (linear_ft * railing_price)}`;
+        price.textContent = `${parseFloat(price.textContent) + (linear_ft * railing_price)}`;
     }else{
-        price.textContent = `${parseInt(price.textContent) - (linear_ft * railing_price)}`;
+        price.textContent = `${parseFloat(price.textContent) - (linear_ft * railing_price)}`;
     }
 }
 
@@ -761,9 +768,9 @@ function add_metal_ramp_price(){
     const price = document.getElementById('price');
     const metal_ramp_box = document.getElementById('metal_ramp');
     if (metal_ramp_box.checked == true){
-        price.textContent = `${parseInt(price.textContent) + ramp_price[metal_ramp_box.id]}`;
+        price.textContent = `${parseFloat(price.textContent) + ramp_price[metal_ramp_box.id]}`;
     }else{
-        price.textContent = `${parseInt(price.textContent) - ramp_price[metal_ramp_box.id]}`;
+        price.textContent = `${parseFloat(price.textContent) - ramp_price[metal_ramp_box.id]}`;
     }
 }
 
@@ -773,15 +780,15 @@ function add_wood_ramp_price(event){
     event.preventDefault();
     const price = document.getElementById('price');
     const wood_input = document.getElementById('wood_ramp');
-    const wood_value = parseInt(wood_input.value) || 0;
+    const wood_value = parseFloat(wood_input.value) || 0;
 
     if (previous_wood_ramp == 0){
-        price.textContent = parseInt(price.textContent) + (ramp_price['wood_ramp'] * wood_value);
+        price.textContent = parseFloat(price.textContent) + (ramp_price['wood_ramp'] * wood_value);
     }else{
-        price.textContent = parseInt(price.textContent) - (ramp_price['wood_ramp'] * previous_wood_ramp);
-        price.textContent = parseInt(price.textContent) + (ramp_price['wood_ramp'] * wood_value);
+        price.textContent = parseFloat(price.textContent) - (ramp_price['wood_ramp'] * previous_wood_ramp);
+        price.textContent = parseFloat(price.textContent) + (ramp_price['wood_ramp'] * wood_value);
     }
-    previous_wood_ramp = wood_input.value
+    previous_wood_ramp = wood_value;
 }
 
 document.getElementById('wood_ramp_form').addEventListener('submit', add_wood_ramp_price);
@@ -819,9 +826,9 @@ function add_workbench_price(){
         }, 5000)
     }else{
         if (workbench_box.checked == true){
-            price.textContent = parseInt(price.textContent) + work_bench_price[size_abr];
+            price.textContent = parseFloat(price.textContent) + work_bench_price[size_abr];
         }else{
-            price.textContent = parseInt(price.textContent) - work_bench_price[size_abr];
+            price.textContent = parseFloat(price.textContent) - work_bench_price[size_abr];
         }
     }
 }
@@ -854,18 +861,86 @@ function add_loft_price(){
         }, 5000)
     }else{
         if (loft_box.checked == true){
-            price.textContent = parseInt(price.textContent) + loft_price[size_abr];
+            price.textContent = parseFloat(price.textContent) + loft_price[size_abr];
         }else{
-            price.textContent = parseInt(price.textContent) - loft_price[size_abr];
+            price.textContent = parseFloat(price.textContent) - loft_price[size_abr];
         }
     }
 
 }
 
 document.getElementById('loft').addEventListener('change', add_loft_price)
-//END OF EXTRA OPTIONS
 
-/* Finds the total price of the shed
+function add_overhang_price(){
+    const price = document.getElementById('price');
+    const overhang_box = document.getElementById('overhang');
+    const size = document.getElementById('size');
+    const roof_type = document.getElementById('roof');
+
+    if (size.value == 'none' || roof_type.value !== 'barn'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose Barn To Select Overhang</p>";
+        }
+        overhang_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
+    }else{
+        if (overhang_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + overhang_price;
+        }else{
+            price.textContent = parseFloat(price.textContent) - overhang_price;
+        }
+    }
+}
+
+document.getElementById('overhang').addEventListener('change', add_overhang_price)
+
+function add_vent_price(event){
+    event.preventDefault();
+    const price = document.getElementById('price');
+    const vent_input = document.getElementById('wood_ramp');
+    const vent_value = parseFloat(vent_input.value) || 0;
+    const flowerbox = documnet.getElementById('flowerbox');
+
+    if (flowerbox.checked !== checked){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
+        }
+        build_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
+    }else{
+        if (previous_vent == 0){
+            price.textContent = parseFloat(price.textContent) + (arched_garden_vents * vent_value);
+        }else{
+            price.textContent = parseFloat(price.textContent) - (arched_garden_vents * previous_wood_ramp);
+            price.textContent = parseFloat(price.textContent) + (arched_garden_vents * vent_value);
+        }
+        previous_vent = vent_value;
+    }
+}
+
+document.getElementById('vent_form').addEventListener('change', add_vent_price)
+
+function add_build_site_price(){
+    const price = document.getElementById('price');
+    const build_box = document.getElementById('on_site');
+    const size = document.getElementById('size');
+    const roof_type = document.getElementById('roof');
+    let total_shed_price = 0
+
     if (roof_type.value == 'none' || size.value == 'none'){
         window.scrollTo({
             top: 0,
@@ -875,7 +950,7 @@ document.getElementById('loft').addEventListener('change', add_loft_price)
         if (roof_error.innerHTML === ''){
             roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
         }
-        workbench_box.checked = false;
+        build_box.checked = false;
         setTimeout(function (){
             roof_error.innerHTML = "";
         }, 5000)
@@ -886,5 +961,212 @@ document.getElementById('loft').addEventListener('change', add_loft_price)
     }else if (roof_type.value == "victorian"){
         total_shed_price = victorian_price[size.value];
     }else if (roof_type.value == "garden_studio"){
-        total_shed_price = garden_price[size.value]; 
-*/
+        total_shed_price = garden_price[size.value];
+    }
+
+    if (total_shed_price !== 0){
+        if (build_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + (total_shed_price * build_on_site);
+        }else{
+            price.textContent = parseFloat(price.textContent) - (total_shed_price * build_on_site);
+        }
+    }
+}
+
+document.getElementById('on_site').addEventListener('change', add_build_site_price);
+
+function add_silver_tech_price(){
+    const price = document.getElementById('price');
+    const silver_box = document.getElementById('silvertech');
+    const size = document.getElementById('size');
+    const roof_type = document.getElementById('roof');
+    let total_shed_price = 0
+
+    if (roof_type.value == 'none' || size.value == 'none'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
+        }
+        silver_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
+    }else if (roof_type.value == "shed"){
+        total_shed_price = shed_price[size.value];
+    }else if (roof_type.value == "barn"){
+        total_shed_price = barn_price[size.value];
+    }else if (roof_type.value == "victorian"){
+        total_shed_price = victorian_price[size.value];
+    }else if (roof_type.value == "garden_studio"){
+        total_shed_price = garden_price[size.value];
+    }
+
+    if (total_shed_price !== 0){
+        if (silver_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + (total_shed_price * silvertech_wall_roof);
+        }else{
+            price.textContent = parseFloat(price.textContent) - (total_shed_price * silvertech_wall_roof);
+        }
+    }
+}
+
+document.getElementById('silvertech').addEventListener('change', add_silver_tech_price);
+
+function add_siding_price(){
+    const price = document.getElementById('price');
+    const siding_box = document.getElementById('siding');
+    const size = document.getElementById('size');
+    const roof_type = document.getElementById('roof');
+    let total_shed_price = 0;
+
+    if (roof_type.value == 'none' || size.value == 'none'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
+        }
+        siding_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
+    }else if (roof_type.value == "shed"){
+        total_shed_price = shed_price[size.value];
+    }else if (roof_type.value == "barn"){
+        total_shed_price = barn_price[size.value];
+    }else if (roof_type.value == "victorian"){
+        total_shed_price = victorian_price[size.value];
+    }else if (roof_type.value == "garden_studio"){
+        total_shed_price = garden_price[size.value];
+    }
+
+    if (total_shed_price !== 0){
+        if (siding_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + (total_shed_price * vinly_siding);
+        }else{
+            price.textContent = parseFloat(price.textContent) - (total_shed_price * vinly_siding);
+        }
+    }
+}
+
+document.getElementById('siding').addEventListener('change', add_siding_price);
+
+function add_shingle_price(){
+    const price = document.getElementById('price');
+    const shingle_box = document.getElementById('shingle');
+    const size = document.getElementById('size');
+    const roof_type = document.getElementById('roof');
+    let total_shed_price = 0
+
+    if (roof_type.value == 'none' || size.value == 'none'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
+        }
+        shingle_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
+    }else if (roof_type.value == "shed"){
+        total_shed_price = shed_price[size.value];
+    }else if (roof_type.value == "barn"){
+        total_shed_price = barn_price[size.value];
+    }else if (roof_type.value == "victorian"){
+        total_shed_price = victorian_price[size.value];
+    }else if (roof_type.value == "garden_studio"){
+        total_shed_price = garden_price[size.value];
+    }
+
+    if (total_shed_price !== 0){
+        if (shingle_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + (total_shed_price * desinger_shingle_roof);
+        }else{
+            price.textContent = parseFloat(price.textContent) - (total_shed_price * desinger_shingle_roof);
+        }
+    }
+}
+
+
+document.getElementById('shingle').addEventListener('change', add_shingle_price);
+
+function add_interior_wall_price(){
+    const price = document.getElementById('price');
+    const interior_box = document.getElementById('interior');
+    const size = document.getElementById('size');
+
+    if (size.value == 'none'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
+        }
+        interior_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000);
+    }else{
+        const width_length = size.value.split('x')
+        if (interior_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + ((2*parseInt(width_length[0]) + 2*parseInt(width_length[1])) * interior_wall);
+        }else{
+            price.textContent = parseFloat(price.textContent) - ((2*parseInt(width_length[0]) + 2*parseInt(width_length[1])) * interior_wall);
+        }
+    }
+}
+
+document.getElementById('interior').addEventListener('change', add_interior_wall_price);
+
+function add_exterior_wall_price(){
+    const price = document.getElementById('price');
+    const exterior_box = document.getElementById('exterior');
+    const size = document.getElementById('size');
+    const roof_type = document.getElementById('roof');
+    let total_shed_price = 0;
+
+    if (roof_type.value == 'none' || size.value == 'none'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
+        }
+        exterior_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
+    }else if (roof_type.value == "shed"){
+        total_shed_price = shed_price[size.value];
+    }else if (roof_type.value == "barn"){
+        total_shed_price = barn_price[size.value];
+    }else if (roof_type.value == "victorian"){
+        total_shed_price = victorian_price[size.value];
+    }else if (roof_type.value == "garden_studio"){
+        total_shed_price = garden_price[size.value];
+    }
+
+    if (total_shed_price !== 0){
+        if (exterior_box.checked == true){
+            price.textContent = parseFloat(price.textContent) + (total_shed_price * exterior_wall);
+        }else{
+            price.textContent = parseFloat(price.textContent) - (total_shed_price * exterior_wall);
+        }
+    }
+}
+
+document.getElementById('exterior').addEventListener('change', add_exterior_wall_price);
+//END OF EXTRA OPTIONS
