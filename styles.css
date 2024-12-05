@@ -1,3 +1,19 @@
 .hide {
     display: none;
 }
+
+#center_div{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+main > form{
+    display: flex;
+    flex-direction: column;
+}
+
+main div{
+    margin-top: 25px;
+}
