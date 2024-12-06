@@ -731,16 +731,30 @@ function add_main_railing_price(){
     const main_railing_box = document.getElementById('main_railing');
     const porch_select = document.getElementById('porch_size');
     const size = document.getElementById('size');
-    const width = size.value.slice(0,2);
+    let width = size.value.slice(0,2);
     if (!parseFloat(width)){
         width = size.value.slice(0, 1);
     }
     const linear_ft = (2 * parseFloat(porch_select.value)) + parseFloat(width);
-    console.log(linear_ft)
-    if (main_railing_box.checked == true){
-        price.textContent = `${parseFloat(price.textContent) + (linear_ft * railing_price)}`;
+    if (size.value == 'none'){
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        roof_error = document.getElementById('roof_error')
+        if (roof_error.innerHTML === ''){
+            roof_error.innerHTML += "<p>Please Choose a Size</p>";
+        }
+        main_railing_box.checked = false;
+        setTimeout(function (){
+            roof_error.innerHTML = "";
+        }, 5000)
     }else{
-        price.textContent = `${parseFloat(price.textContent) - (linear_ft * railing_price)}`;
+        if (main_railing_box.checked == true){
+            price.textContent = `${parseFloat(price.textContent) + (linear_ft * railing_price)}`;
+        }else{
+            price.textContent = `${parseFloat(price.textContent) - (linear_ft * railing_price)}`;
+        }
     }
 }
 
@@ -932,7 +946,7 @@ function add_vent_price(event){
     }
 }
 
-document.getElementById('vent_form').addEventListener('change', add_vent_price)
+document.getElementById('vent_form').addEventListener('submit', add_vent_price)
 
 function add_build_site_price(){
     const price = document.getElementById('price');
