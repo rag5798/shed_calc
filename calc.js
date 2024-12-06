@@ -918,11 +918,12 @@ document.getElementById('overhang').addEventListener('change', add_overhang_pric
 function add_vent_price(event){
     event.preventDefault();
     const price = document.getElementById('price');
-    const vent_input = document.getElementById('wood_ramp');
-    const vent_value = parseFloat(vent_input.value) || 0;
-    const flowerbox = documnet.getElementById('flowerbox');
+    const vent_input = document.getElementById('garden_vent');
+    const vent_value = parseInt(vent_input.value) || 0;
+    const flowerbox = document.getElementById('flowerbox');
+    const roof_type = document.getElementById('roof');
 
-    if (flowerbox.checked !== checked){
+    if (roof_type.value !== 'garden_studio'){
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -931,7 +932,7 @@ function add_vent_price(event){
         if (roof_error.innerHTML === ''){
             roof_error.innerHTML += "<p>Please Choose a Roof Type and Size</p>";
         }
-        build_box.checked = false;
+        flowerbox.checked = false;
         setTimeout(function (){
             roof_error.innerHTML = "";
         }, 5000)
@@ -939,7 +940,7 @@ function add_vent_price(event){
         if (previous_vent == 0){
             price.textContent = parseFloat(price.textContent) + (arched_garden_vents * vent_value);
         }else{
-            price.textContent = parseFloat(price.textContent) - (arched_garden_vents * previous_wood_ramp);
+            price.textContent = parseFloat(price.textContent) - (arched_garden_vents * previous_vent);
             price.textContent = parseFloat(price.textContent) + (arched_garden_vents * vent_value);
         }
         previous_vent = vent_value;
