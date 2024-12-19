@@ -279,6 +279,8 @@ let previous_porch = "";
 let previous_wood_ramp = 0;
 
 let previous_vent = 0;
+
+let previous_metal_ramp = 0;
 //*************************************************************************************************************
 
 //unhides things when needed
@@ -778,17 +780,22 @@ document.getElementById('side_railing').addEventListener('change', add_side_rail
 //Adding state to each railing would allow for smoother price adjustments, hiding railing elements until they can be properly processed
 
 //RAMP OPTIONS
-function add_metal_ramp_price(){
+function add_metal_ramp_price(event){
+    event.preventDefault();
     const price = document.getElementById('price');
-    const metal_ramp_box = document.getElementById('metal_ramp');
-    if (metal_ramp_box.checked == true){
-        price.textContent = `${parseFloat(price.textContent) + ramp_price[metal_ramp_box.id]}`;
+    const metal_input = document.getElementById('metal_ramp');
+    const metal_value = parseFloat(metal_input.value) || 0;
+
+    if (previous_metal_ramp == 0){
+        price.textContent = parseFloat(price.textContent) + (ramp_price['metal_ramp'] * metal_value);
     }else{
-        price.textContent = `${parseFloat(price.textContent) - ramp_price[metal_ramp_box.id]}`;
+        price.textContent = parseFloat(price.textContent) - (ramp_price['metal_ramp'] * previous_metal_ramp);
+        price.textContent = parseFloat(price.textContent) + (ramp_price['metal_ramp'] * metal_value);
     }
+    previous_metal_ramp = metal_value;
 }
 
-document.getElementById('metal_ramp').addEventListener('change', add_metal_ramp_price);
+document.getElementById('metal_ramp_form').addEventListener('submit', add_metal_ramp_price);
 
 function add_wood_ramp_price(event){
     event.preventDefault();
